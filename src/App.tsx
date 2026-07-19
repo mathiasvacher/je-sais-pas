@@ -4,7 +4,7 @@ import { ChoiceCard } from './components/ChoiceCard'
 import { FiltersModal } from './components/FiltersModal'
 import { WinnerScreen } from './components/WinnerScreen'
 import { filterFoods, foods, SERIES_LENGTH, type Food, type FoodKind, type FoodMoment, type FoodStyle } from './data/foods'
-import { keepChoice, pickChoices } from './lib/choices'
+import { pickChoices } from './lib/choices'
 import { createGoogleMapsSearchUrl } from './lib/maps'
 import './App.css'
 
@@ -20,6 +20,7 @@ function App() {
   const filteredFoods = useMemo(() => filterFoods(selectedKinds, selectedStyles, dateMode, homeMode, restaurantMode, selectedMoments), [selectedKinds, selectedStyles, dateMode, homeMode, restaurantMode, selectedMoments])
   const [options, setOptions] = useState(() => pickChoices(foods))
   const [choices, setChoices] = useState<Food[]>([])
+  const [rejectedFoods, setRejectedFoods] = useState<Food[]>([])
   const [winner, setWinner] = useState<Food | null>(null)
 
   const choiceInSeries = choices.length + 1
@@ -28,13 +29,31 @@ function App() {
   function resetGame(foodList = filteredFoods) {
     setOptions(pickChoices(foodList))
     setChoices([])
-    setWinner(null)
+    setRejectedFoods([])
+    setWinner(foodList.length === 1 ? foodList[0] : null)
   }
 
   function choose(food: Food, index: number) {
-    setChoices((current) => [...current, food])
-    setOptions(keepChoice(food, index, options, filteredFoods))
-    if (choices.length === SERIES_LENGTH - 1) setWinner(food)
+    const nextChoices = [...choices, food]
+    const nextRejectedFoods = [...rejectedFoods, ...options.filter((option) => option !== food)]
+    const remainingFoods = filteredFoods.filter((option) => option === food || !nextRejectedFoods.includes(option))
+
+    setChoices(nextChoices)
+    setRejectedFoods(nextRejectedFoods)
+
+    if (nextChoices.length === SERIES_LENGTH || remainingFoods.length < 3) {
+      setWinner(food)
+      return
+    }
+
+    const replacements = pickChoices(remainingFoods.filter((option) => option !== food), [], 2)
+    let replacementIndex = 0
+    setOptions(options.map((_, optionIndex) => {
+      if (optionIndex === index) return food
+      const replacement = replacements[replacementIndex]
+      replacementIndex += 1
+      return replacement
+    }))
   }
 
   function skip() { setOptions(pickChoices(filteredFoods, options)) }
@@ -43,6 +62,7 @@ function App() {
     if (!winner) return
     setOptions([winner, ...pickChoices(filteredFoods, [winner], 2)])
     setChoices([])
+    setRejectedFoods([])
     setWinner(null)
   }
 
