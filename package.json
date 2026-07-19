@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://mathiasvacher.github.io/je-sais-pas/",
+  "homepage": "https://jesaispas.mathiasvacher.fr",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
