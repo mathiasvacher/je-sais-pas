@@ -104,7 +104,7 @@ function App() {
       <div className="topbar-actions">
         <button type="button" className={`date-trigger${dateMode ? ' active' : ''}`} onClick={toggleDateMode} aria-pressed={dateMode}>♥ <span>Mode date</span></button>
         <button type="button" className={`home-trigger${homeMode ? ' active' : ''}`} onClick={toggleHomeMode} aria-pressed={homeMode}>⌂ <span>À la maison</span></button>
-        <button type="button" className={`restaurant-trigger${restaurantMode ? ' active' : ''}`} onClick={toggleRestaurantMode} aria-pressed={restaurantMode}>⌖ <span>Restaurant</span></button>
+        <button type="button" className={`restaurant-trigger${restaurantMode ? ' active' : ''}`} onClick={toggleRestaurantMode} aria-pressed={restaurantMode}>🍽️ <span>Restaurant</span></button>
         <button type="button" className="filters-trigger" onClick={() => setFiltersOpen(true)} aria-haspopup="dialog"><span>☷</span><span className="filter-label">Filtres</span>{activeFilterCount > 0 && <b>{activeFilterCount}</b>}</button>
       </div>
     </header>
