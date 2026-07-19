@@ -67,22 +67,36 @@ function shuffle(list: Food[]) {
   return [...list].sort(() => Math.random() - 0.5)
 }
 
-function pickChoices(excluded: Food[] = []) {
+function pickChoices(excluded: Food[] = [], count = 3) {
   const pool = foods.filter((food) => !excluded.includes(food))
-  return shuffle(pool).slice(0, 3)
+  return shuffle(pool).slice(0, count)
+}
+
+function keepChoice(food: Food, index: number, previousOptions: Food[]) {
+  const replacements = pickChoices(previousOptions, 2)
+  let replacementIndex = 0
+
+  return previousOptions.map((_, optionIndex) => {
+    if (optionIndex === index) return food
+    const replacement = replacements[replacementIndex]
+    replacementIndex += 1
+    return replacement
+  })
 }
 
 function App() {
   const initialChoices = useMemo(() => pickChoices(), [])
   const [options, setOptions] = useState(initialChoices)
   const [choices, setChoices] = useState<Food[]>([])
+  const [winner, setWinner] = useState<Food | null>(null)
 
-  const choiceInSeries = (choices.length % 5) + 1
-  const series = Math.floor(choices.length / 5) + 1
+  const choiceInSeries = choices.length + 1
 
-  function choose(food: Food) {
+  function choose(food: Food, index: number) {
+    const isFinalChoice = choices.length === 7
     setChoices((current) => [...current, food])
-    setOptions(pickChoices(options))
+    setOptions(keepChoice(food, index, options))
+    if (isFinalChoice) setWinner(food)
   }
 
   function skip() {
@@ -92,6 +106,14 @@ function App() {
   function restart() {
     setOptions(pickChoices())
     setChoices([])
+    setWinner(null)
+  }
+
+  function continueSearching() {
+    if (!winner) return
+    setOptions([winner, ...pickChoices([winner], 2)])
+    setChoices([])
+    setWinner(null)
   }
 
   return (
@@ -105,20 +127,20 @@ function App() {
       </header>
 
       <section id="top" className="game" aria-live="polite">
-        <>
+        {!winner ? <>
           <div className="eyebrow-row">
             <span className="eyebrow">LE GRAND CHOIX DU SOIR</span>
-            <span className="round">série {series} · choix {choiceInSeries} / 5</span>
+            <span className="round">choix {choiceInSeries} / 8</span>
           </div>
-          <div className="progress" aria-label={`Choix ${choiceInSeries} sur 5`}>
-            <span style={{ width: `${((choiceInSeries - 1) / 5) * 100}%` }} />
+          <div className="progress" aria-label={`Choix ${choiceInSeries} sur 8`}>
+            <span style={{ width: `${((choiceInSeries - 1) / 8) * 100}%` }} />
           </div>
           <h1>Qu’est-ce qui te ferait<br /><em>vraiment</em> plaisir ?</h1>
-          <p className="intro">Choisis instinctivement. On peut continuer autant que tu veux.</p>
+          <p className="intro">Ton choix reste en place, les autres changent autour.</p>
 
           <div className="choices">
-            {options.map((food) => (
-              <button key={food.name} className={`food-card ${food.color}`} onClick={() => choose(food)}>
+            {options.map((food, index) => (
+              <button key={food.name} className={`food-card ${food.color}`} onClick={() => choose(food, index)}>
                 <span className="food-emoji" role="img" aria-label={food.name}>{food.emoji}</span>
                 <span className="food-copy"><span className="food-name">{food.name}</span><span className="food-caption">{food.caption}</span></span>
                 <span className="choose" aria-hidden="true">→</span>
@@ -126,7 +148,16 @@ function App() {
             ))}
           </div>
           <button className="skip" onClick={skip}>Aucun des trois ne me donne envie <span>↻</span></button>
-        </>
+        </> : (
+          <div className="result">
+            <span className="eyebrow">LE VERDICT EST TOMBÉ</span>
+            <div className={`winner-icon ${winner.color}`} role="img" aria-label={winner.name}>{winner.emoji}</div>
+            <p className="result-kicker">Ce soir, on part sur</p>
+            <h1>{winner.name} !</h1>
+            <p className="intro">C’est le choix qui a survécu à toutes les hésitations.</p>
+            <button className="restart" onClick={continueSearching}><span>↻</span> On continue de chercher</button>
+          </div>
+        )}
       </section>
 
       <footer>
