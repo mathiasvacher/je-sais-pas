@@ -106,23 +106,29 @@ export const foods: Food[] = [
   { name: 'Tiramisu maison', emoji: '🍰', color: 'peach', caption: 'À préparer ensemble avant de le dévorer.' },
   { name: 'Cookies maison', emoji: '🍪', color: 'pink', caption: 'Encore tièdes, avec le cœur coulant.' },
   { name: 'Crêpes party', emoji: '🥞', color: 'lilac', caption: 'Chacun sa garniture, personne ne juge.' },
+  { name: 'Pâtes au poulet', emoji: '🍝', color: 'coral', caption: 'Poulet doré, crème ou pesto : simple et efficace.' },
+  { name: 'Poulet curry coco', emoji: '🍛', color: 'yellow', caption: 'Avec du riz, des légumes et une sauce toute douce.' },
+  { name: 'Poulet rôti & pommes de terre', emoji: '🍗', color: 'peach', caption: 'Un grand classique du dimanche, même un mardi.' },
+  { name: 'Saumon au four & légumes', emoji: '🐟', color: 'blue', caption: 'Tout sur une plaque, et le dîner est prêt.' },
+  { name: 'Gratin de pâtes', emoji: '🧀', color: 'lilac', caption: 'Pâtes, béchamel, fromage : doré et réconfortant.' },
 ]
 
 const fastFoodNames = new Set(['McDonald’s', 'KFC', 'Burger King', 'O’Tacos', 'Subway', 'Fried chicken', 'Korean corn dog', 'Loaded fries', 'Hot-dog gourmet'])
 const dessertNames = new Set(['Glace', 'Tiramisu', 'Cookies chauds', 'Bubble tea', 'Praluline'])
 const dateFriendlyNames = new Set(['Restaurant italien', 'Restaurant japonais', 'Restaurant chinois', 'Restaurant mexicain', 'Restaurant indien', 'Restaurant libanais', 'Bouchon lyonnais', 'Libanais', 'Sushi', 'Pizza', 'Pâtes', 'Tapas', 'Cuisine grecque', 'Restaurant gastronomique', 'Cocktails & tapas', 'Raclette à deux', 'Burrata', 'Planche à partager', 'Fondue savoyarde', 'Glace', 'Tiramisu', 'Pizza maison', 'Pâtes au pesto', 'Lasagnes', 'Gnocchis gratinés', 'Risotto', 'Sushis maison', 'Planche apéro', 'Fondue maison', 'Tiramisu maison', 'Cookies maison', 'Crêpes party'])
-const homeFriendlyNames = new Set(['Pizza', 'Pâtes', 'Ramen', 'Curry indien', 'Tacos', 'Poké bowl', 'Salade composée', 'Burrata', 'Planche à partager', 'Raclette à deux', 'Apéro dînatoire', 'Crêpes maison', 'Curry maison', 'Raclette maison', 'Glace', 'Cookies chauds', 'Pizza maison', 'Pâtes au pesto', 'Lasagnes', 'Gnocchis gratinés', 'Risotto', 'Dahl de lentilles', 'Chili con carne', 'Wok de légumes', 'Nouilles sautées', 'Riz sauté', 'Quesadillas', 'Fajitas', 'Burritos maison', 'Burgers maison', 'Croque-monsieur', 'Quiche maison', 'Omelette gourmande', 'Soupe & tartines', 'Salade César', 'Poké bowl maison', 'Sushis maison', 'Planche apéro', 'Fondue maison', 'Tiramisu maison', 'Cookies maison', 'Crêpes party'])
+const homeFriendlyNames = new Set(['Pizza', 'Pâtes', 'Ramen', 'Curry indien', 'Tacos', 'Poké bowl', 'Salade composée', 'Burrata', 'Planche à partager', 'Raclette à deux', 'Apéro dînatoire', 'Crêpes maison', 'Curry maison', 'Raclette maison', 'Glace', 'Cookies chauds', 'Pizza maison', 'Pâtes au pesto', 'Lasagnes', 'Gnocchis gratinés', 'Risotto', 'Dahl de lentilles', 'Chili con carne', 'Wok de légumes', 'Nouilles sautées', 'Riz sauté', 'Quesadillas', 'Fajitas', 'Burritos maison', 'Burgers maison', 'Croque-monsieur', 'Quiche maison', 'Omelette gourmande', 'Soupe & tartines', 'Salade César', 'Poké bowl maison', 'Sushis maison', 'Planche apéro', 'Fondue maison', 'Tiramisu maison', 'Cookies maison', 'Crêpes party', 'Pâtes au poulet', 'Poulet curry coco', 'Poulet rôti & pommes de terre', 'Saumon au four & légumes', 'Gratin de pâtes'])
+const homeOnlyNames = new Set(['Crêpes maison', 'Curry maison', 'Raclette maison', 'Pizza maison', 'Pâtes au pesto', 'Dahl de lentilles', 'Chili con carne', 'Wok de légumes', 'Riz sauté', 'Quesadillas', 'Fajitas', 'Burritos maison', 'Burgers maison', 'Croque-monsieur', 'Quiche maison', 'Omelette gourmande', 'Soupe & tartines', 'Poké bowl maison', 'Sushis maison', 'Planche apéro', 'Fondue maison', 'Tiramisu maison', 'Cookies maison', 'Crêpes party', 'Pâtes au poulet', 'Poulet curry coco', 'Poulet rôti & pommes de terre', 'Saumon au four & légumes', 'Gratin de pâtes'])
 const premiumNames = new Set(['Restaurant gastronomique', 'Parrilla argentine', 'Pasta à la truffe'])
 const aperoNames = new Set(['Tapas', 'Cocktails & tapas', 'Planche à partager', 'Planche apéro', 'Apéro dînatoire', 'Libanais', 'Burrata', 'Focaccia garnie', 'Halloumi grillé'])
 const snackNames = new Set(['McDonald’s', 'KFC', 'Burger King', 'O’Tacos', 'Subway', 'Fried chicken', 'Hot-dog gourmet', 'Loaded fries', 'Korean corn dog', 'Bagel', 'Croque-monsieur', 'Quesadillas', 'Cookies chauds', 'Cookies maison', 'Bubble tea', 'Glace'])
 const brunchNames = new Set(['Brunch', 'Crêperie', 'Crêpes maison', 'Crêpes party', 'Bagel', 'Omelette gourmande', 'Pancakes', 'Praluline'])
 
 const styleNames: Record<FoodStyle, string[]> = {
-  français: ['Bouchon lyonnais', 'Bistrot français', 'Crêperie', 'Ravioles', 'Fondue savoyarde', 'Poulet', 'Praluline'],
+  français: ['Bouchon lyonnais', 'Bistrot français', 'Crêperie', 'Ravioles', 'Fondue savoyarde', 'Poulet', 'Praluline', 'Poulet rôti & pommes de terre', 'Saumon au four & légumes'],
   asiatique: ['Restaurant japonais', 'Restaurant chinois', 'Sushi', 'Ramen', 'Coréen', 'Vietnamien', 'Thaï', 'Gyozas & dumplings', 'Bao buns', 'Katsu sando', 'Korean corn dog', 'Bubble tea', 'Wok de légumes', 'Nouilles sautées', 'Riz sauté', 'Sushis maison', 'Poké bowl maison'],
-  italien: ['Restaurant italien', 'Pizza', 'Pâtes', 'Focaccia garnie', 'Burrata', 'Tiramisu', 'Pizza maison', 'Pâtes au pesto', 'Lasagnes', 'Gnocchis gratinés', 'Risotto', 'Tiramisu maison'],
+  italien: ['Restaurant italien', 'Pizza', 'Pâtes', 'Focaccia garnie', 'Burrata', 'Tiramisu', 'Pizza maison', 'Pâtes au pesto', 'Lasagnes', 'Gnocchis gratinés', 'Risotto', 'Tiramisu maison', 'Pâtes au poulet', 'Gratin de pâtes'],
   méditerranéen: ['Restaurant libanais', 'Libanais', 'Tapas', 'Cuisine grecque', 'Cuisine arménienne', 'Paella', 'Halloumi grillé'],
-  'du-monde': ['Restaurant mexicain', 'Restaurant indien', 'Curry indien', 'Éthiopien', 'Couscous', 'Mafé', 'Burrito', 'Tacos', 'Parrilla argentine', 'Poké bowl', 'Dahl de lentilles', 'Chili con carne', 'Quesadillas', 'Fajitas', 'Burritos maison'],
+  'du-monde': ['Restaurant mexicain', 'Restaurant indien', 'Curry indien', 'Éthiopien', 'Couscous', 'Mafé', 'Burrito', 'Tacos', 'Parrilla argentine', 'Poké bowl', 'Dahl de lentilles', 'Chili con carne', 'Quesadillas', 'Fajitas', 'Burritos maison', 'Poulet curry coco'],
   végétarien: ['Végétarien', 'Salade composée', 'Halloumi grillé', 'Burrata', 'Poké bowl', 'Dahl de lentilles', 'Wok de légumes', 'Quiche maison', 'Omelette gourmande', 'Soupe & tartines', 'Poké bowl maison'],
 }
 
@@ -137,7 +143,7 @@ export function filterFoods(kinds: FoodKind[], styles: FoodStyle[], dateMode = f
     const kind: FoodKind = dessertNames.has(food.name) ? 'dessert' : fastFoodNames.has(food.name) ? 'fast-food' : 'restaurant'
     const matchesKind = kinds.length === 0 || kinds.includes(kind)
     const matchesStyle = styles.length === 0 || styles.some((style) => styleNames[style].includes(food.name))
-    const matchesPlace = (homeMode && restaurantMode) || (!homeMode && !restaurantMode) || (homeMode ? homeFriendlyNames.has(food.name) : !homeFriendlyNames.has(food.name))
+    const matchesPlace = (homeMode && restaurantMode) || (!homeMode && !restaurantMode) || (homeMode ? homeFriendlyNames.has(food.name) : !homeOnlyNames.has(food.name))
     const matchesMoment = moments.length === 0 || moments.some((moment) => {
       if (moment === 'apero') return aperoNames.has(food.name)
       if (moment === 'grignoter') return snackNames.has(food.name)
