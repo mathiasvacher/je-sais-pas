@@ -61,25 +61,3 @@ src/
 ## Ajouter ou modifier une idée
 
 Le catalogue est défini dans `src/data/foods.ts`. Chaque idée possède un nom, un emoji, une couleur et une courte description. Les mêmes données servent également à déterminer les filtres (type de cuisine, budget, moment, modes maison/date/restaurant). Après une modification, lancez `npm run lint` puis `npm run build` pour vérifier le projet.
-
-## Contenu habituel d'un README
-
-Un README sert à permettre à une nouvelle personne de comprendre et d'utiliser rapidement un projet. Il contient généralement :
-
-- le nom du projet et son objectif ;
-- les principales fonctionnalités ;
-- les technologies utilisées et les prérequis ;
-- les instructions d'installation, de lancement et de test ;
-- les commandes utiles ;
-- l'organisation importante des fichiers ;
-- les indications de contribution, de déploiement et de licence lorsque le projet en a besoin.
-
-## Déploiement
-
-Le projet est configuré pour GitHub Pages. Après avoir créé la version de production avec `npm run build`, exécutez :
-
-```bash
-npm run deploy
-```
-
-La propriété `homepage` du fichier `package.json` indique l'URL de publication prévue.
