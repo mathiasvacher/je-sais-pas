@@ -1,75 +1,85 @@
-# React + TypeScript + Vite
+# je sais pas
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Une application web qui aide à choisir quoi manger sans transformer le dîner en débat interminable. À chaque tour, trois idées sont proposées : on garde celle qui donne le plus envie, les autres sont remplacées, puis l'application dévoile la suggestion gagnante.
 
-Currently, two official plugins are available:
+## Fonctionnalités
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- Sélection progressive parmi des idées de repas, restaurants, fast-foods et desserts.
+- Suggestions aléatoires en trois cartes, avec conservation du choix préféré à chaque tour.
+- Résultat après huit choix, ou plus tôt lorsqu'il reste trop peu de possibilités.
+- Modes **date**, **à la maison** et **restaurant** pour adapter les propositions.
+- Filtres par type, cuisine et moment : apéro, grignotage, brunch ou repas.
+- Bouton « Surprise-moi » pour obtenir une idée immédiatement.
+- Catalogue des idées actuellement compatibles avec les filtres.
+- Lien vers une recherche Google Maps pour trouver la suggestion gagnante à proximité.
 
-## React Compiler
+## Aperçu du fonctionnement
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+1. Choisir une proposition parmi les trois affichées, ou les renouveler.
+2. L'idée sélectionnée reste visible ; deux nouvelles idées prennent la place des choix écartés.
+3. À la fin de la série, l'application propose l'idée retenue et permet de chercher un lieu autour de soi.
 
-## Expanding the ESLint configuration
+## Technologies
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- React 19
+- TypeScript
+- Vite
+- ESLint
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## Installation et lancement
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+Pré-requis : une version récente de [Node.js](https://nodejs.org/).
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
+```bash
+npm install
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Vite affiche ensuite l'adresse locale à ouvrir dans le navigateur, généralement `http://localhost:5173`.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## Commandes disponibles
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+| Commande | Rôle |
+| --- | --- |
+| `npm run dev` | Lance le serveur de développement. |
+| `npm run build` | Vérifie TypeScript et génère la version de production dans `dist/`. |
+| `npm run preview` | Prévisualise localement la version construite. |
+| `npm run lint` | Analyse le code avec ESLint. |
+| `npm run deploy` | Publie le contenu de `dist/` sur GitHub Pages. |
 
+## Organisation du projet
+
+```text
+src/
+├── components/   # Cartes de choix et fenêtres modales
+├── data/         # Catalogue d'idées et règles de filtrage
+├── lib/          # Logique de sélection et lien Google Maps
+├── App.tsx       # Écran principal et état de l'application
+└── index.css     # Styles globaux
 ```
+
+## Ajouter ou modifier une idée
+
+Le catalogue est défini dans `src/data/foods.ts`. Chaque idée possède un nom, un emoji, une couleur et une courte description. Les mêmes données servent également à déterminer les filtres (type de cuisine, budget, moment, modes maison/date/restaurant). Après une modification, lancez `npm run lint` puis `npm run build` pour vérifier le projet.
+
+## Contenu habituel d'un README
+
+Un README sert à permettre à une nouvelle personne de comprendre et d'utiliser rapidement un projet. Il contient généralement :
+
+- le nom du projet et son objectif ;
+- les principales fonctionnalités ;
+- les technologies utilisées et les prérequis ;
+- les instructions d'installation, de lancement et de test ;
+- les commandes utiles ;
+- l'organisation importante des fichiers ;
+- les indications de contribution, de déploiement et de licence lorsque le projet en a besoin.
+
+## Déploiement
+
+Le projet est configuré pour GitHub Pages. Après avoir créé la version de production avec `npm run build`, exécutez :
+
+```bash
+npm run deploy
+```
+
+La propriété `homepage` du fichier `package.json` indique l'URL de publication prévue.
